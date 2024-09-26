@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AutomationPracticeFormTests {
     @BeforeAll
@@ -61,5 +60,20 @@ public class AutomationPracticeFormTests {
 
         // button submit
         $("button[type=submit]").click();
+
+        // verify
+        $x("//td[contains(text(), 'Student Name')]/../td[2]").shouldHave(text("Mike Mikov"));
+        $x("//td[contains(text(), 'Student Email')]/../td[2]").shouldHave(text("mike@mail.com"));
+        $x("//td[contains(text(), 'Gender')]/../td[2]").shouldHave(text("Male"));
+        $x("//td[contains(text(), 'Mobile')]/../td[2]").shouldHave(text("1234567891"));
+        $x("//td[contains(text(), 'Date of Birth')]/../td[2]").shouldHave(text("01 January,1970"));
+        $x("//td[contains(text(), 'Subjects')]/../td[2]").shouldHave(text("English"));
+        $x("//td[contains(text(), 'Hobbies')]/../td[2]").shouldHave(text("Sports, Music"));
+        $x("//td[contains(text(), 'Picture')]/../td[2]").shouldHave(text("pngwing.png"));
+        $x("//td[contains(text(), 'Address')]/../td[2]").shouldHave(text("Some Street 1"));
+        $x("//td[contains(text(), 'State and City')]/../td[2]").shouldHave(text("Haryana Karnal"));
+
+        //close
+        $("button[id=closeLargeModal]").click();
     }
 }
