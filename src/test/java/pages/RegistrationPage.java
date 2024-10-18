@@ -3,6 +3,8 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -13,9 +15,18 @@ public class RegistrationPage {
             userEmailInput = $("#userEmail"),
             genderWrapper = $("#genterWrapper"),
             userNumberInput = $("#userNumber"),
-            calendarInput = $("#dateOfBirthInput");
+            calendarInput = $("#dateOfBirthInput"),
+            subjectInput = $("#subjectsInput"),
+            hobbieCheckbox = $("#hobbiesWrapper"),
+            pictureLoad = $("#uploadPicture"),
+            addressArea = $("#currentAddress"),
+            stateField = $("#state"),
+            stateCityWrapper = $("#stateCity-wrapper"),
+            cityField = $("#city"),
+            submitBtn = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
+
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
@@ -58,6 +69,45 @@ public class RegistrationPage {
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         calendarInput.click();
         calendarComponent.setDate(day, month, year);
+
+        return this;
+    }
+
+    public RegistrationPage setSubject(String value) {
+        subjectInput.setValue(value).pressEnter();
+
+        return this;
+    }
+
+    public RegistrationPage setHobbie(String value) {
+        hobbieCheckbox.$(byText(value)).click();
+
+        return this;
+    }
+
+    public RegistrationPage setPicture(String value) {
+        pictureLoad.uploadFile(new File(value));
+
+        return this;
+    }
+
+    public RegistrationPage setAddress(String value) {
+        addressArea.setValue(value);
+
+        return this;
+    }
+
+    public RegistrationPage setStateAndCity(String state, String city) {
+        stateField.click();
+        stateCityWrapper.$(byText(state)).click();
+        cityField.click();
+        stateCityWrapper.$(byText(city)).click();
+
+        return  this;
+    }
+
+    public  RegistrationPage setSubmit() {
+        submitBtn.click();
 
         return this;
     }
