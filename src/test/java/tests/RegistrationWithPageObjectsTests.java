@@ -16,7 +16,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
     @Test
     void successfulRegistrationTest() {
-        registrationPage.openPage()
+        registrationPage.openPage("/automation-practice-form")
                         .setFirstName("Mike")
                         .setLastName("Mikov")
                         .setEmail("mikemikov@testmail.ru")
@@ -35,8 +35,40 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
 
         registrationPage.getModalDialogAppear()
-                            .checkModalTitle("Thanks for submitting the form")
+                        .checkModalTitle("Thanks for submitting the form")
                         .checkResult("Student Name", "Mike Mikov")
-                        .checkResult("Student Email", "mikemikov@testmail.ru");
+                        .checkResult("Student Email", "mikemikov@testmail.ru")
+                        .checkResult("Gender", "Male")
+                        .checkResult("Mobile", "7999546342")
+                        .checkResult("Date of Birth", "17 October,2024")
+                        .checkResult("Subjects", "Maths, English")
+                        .checkResult("Hobbies", "Sports, Reading, Music")
+                        .checkResult("Picture", "pngwing.png")
+                        .checkResult("Address", "Some address 1")
+                        .checkResult("State and City", "NCR Delhi")
+                        .setCloseBtn();
+    }
+
+    @Test
+    void negativeRegistrationTest() {
+        registrationPage.openPage("/automation-practice-form")
+                        .setSubmit();
+    }
+
+    @Test
+    void minDataRegistrationTest() {
+        registrationPage.openPage("/automation-practice-form")
+                        .setFirstName("Mike")
+                        .setLastName("Mikov")
+                        .setGender("Male")
+                        .setUserNumber("79995463423")
+                        .setSubmit();
+
+        registrationPage.getModalDialogAppear()
+                .checkModalTitle("Thanks for submitting the form")
+                .checkResult("Student Name", "Mike Mikov")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "7999546342")
+                .setCloseBtn();
     }
 }

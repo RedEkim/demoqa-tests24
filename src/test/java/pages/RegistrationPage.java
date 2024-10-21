@@ -26,12 +26,13 @@ public class RegistrationPage {
             cityField = $("#city"),
             submitBtn = $("#submit"),
             modalDialog = $(".modal-dialog"),
-            modalTitle = $("#example-modal-sizes-title-lg");
+            modalTitle = $("#example-modal-sizes-title-lg"),
+            closeBtn = $("#closeLargeModal");
 
     CalendarComponent calendarComponent = new CalendarComponent();
 
-    public RegistrationPage openPage() {
-        open("/automation-practice-form");
+    public RegistrationPage openPage(String value) {
+        open(value);
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -111,6 +112,12 @@ public class RegistrationPage {
 
     public  RegistrationPage setSubmit() {
         submitBtn.click();
+
+        return this;
+    }
+
+    public RegistrationPage setCloseBtn() {
+        closeBtn.click();
 
         return this;
     }
