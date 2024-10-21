@@ -5,6 +5,7 @@ import pages.components.CalendarComponent;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -23,7 +24,9 @@ public class RegistrationPage {
             stateField = $("#state"),
             stateCityWrapper = $("#stateCity-wrapper"),
             cityField = $("#city"),
-            submitBtn = $("#submit");
+            submitBtn = $("#submit"),
+            modalDialog = $(".modal-dialog"),
+            modalTitle = $("#example-modal-sizes-title-lg");
 
     CalendarComponent calendarComponent = new CalendarComponent();
 
@@ -108,6 +111,18 @@ public class RegistrationPage {
 
     public  RegistrationPage setSubmit() {
         submitBtn.click();
+
+        return this;
+    }
+
+    public RegistrationPage getModalDialogAppear() {
+        modalDialog.should(appear);
+
+        return this;
+    }
+
+    public RegistrationPage checkModalTitle(String value) {
+        modalTitle.shouldHave(text(value));
 
         return this;
     }

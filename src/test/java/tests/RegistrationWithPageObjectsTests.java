@@ -34,11 +34,9 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                         .setSubmit();
 
 
-        $(".modal-dialog").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-//        $(".table-responsive").shouldHave(text("Mike"), text("Mikov"),
-          //      text("mikemikov@testmail.ru"), text("79995463423"));
-        registrationPage.checkResult("Student Name", "Mike Mikov")
-                .checkResult("Student Email", "mikemikov@testmail.ru");
+        registrationPage.getModalDialogAppear()
+                            .checkModalTitle("Thanks for submitting the form")
+                        .checkResult("Student Name", "Mike Mikov")
+                        .checkResult("Student Email", "mikemikov@testmail.ru");
     }
 }
