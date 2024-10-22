@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
@@ -15,6 +16,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
+    @DisplayName("Успешная регистрация с заполнением всех полей")
     void successfulRegistrationTest() {
         registrationPage.openPage("/automation-practice-form")
                         .setFirstName("Mike")
@@ -50,12 +52,14 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация")
     void negativeRegistrationTest() {
         registrationPage.openPage("/automation-practice-form")
                         .setSubmit();
     }
 
     @Test
+    @DisplayName("Успешная регистрация с заполнением основных полей")
     void minDataRegistrationTest() {
         registrationPage.openPage("/automation-practice-form")
                         .setFirstName("Mike")
