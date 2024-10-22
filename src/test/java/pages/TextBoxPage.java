@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.w3c.dom.Text;
+import pages.components.OutputComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -14,6 +15,14 @@ public class TextBoxPage {
                             currentAddressArea = $("#currentAddress"),
                             permanentAddressArea = $("#permanentAddress"),
                             sbmBtn = $("#submit");
+
+    OutputComponent outputComponent = new OutputComponent();
+
+    public TextBoxPage openTextPoxPage() {
+        open("/text-box");
+        $(".text-center").shouldHave(text("Text Box"));
+        return this;
+    }
 
     public TextBoxPage setUserName(String value) {
         userNameInput.setValue(value);
@@ -38,11 +47,6 @@ public class TextBoxPage {
 
         return this;
     }
-    public TextBoxPage openTextPoxPage() {
-        open("/text-box");
-        $(".text-center").shouldHave(text("Text Box"));
-        return this;
-    }
 
     public TextBoxPage sbmBtnClick() {
         sbmBtn.click();
@@ -50,9 +54,8 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage checkOutput(String key, String value) {
-        $("#output").$(byText(key)).parent()
-                .shouldHave(text(value));
+    public TextBoxPage checkResult(String key, String value) {
+        outputComponent.checkResult(key, value);
 
         return this;
     }

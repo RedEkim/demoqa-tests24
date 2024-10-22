@@ -23,9 +23,9 @@ public class TextBoxTestsWithPageObjectsTest extends TestBase {
                     .setPermanentAddressArea("Another street 2")
                     .sbmBtnClick();
 
-        textBoxPage.checkOutput("Name:", "Mike Mikov")
-                .checkOutput("Email:", "mike@mail.com")
-                .checkOutput("Current Address :", "Some street 1")
-                .checkOutput("Permananet Address :", "Another street 2");
+        textBoxPage.checkResult("name", "Mike Mikov")
+                .checkResult("email", "mike@mail.com")
+                .checkResult("currentAddress", "Some street 1")
+                .checkResult("permanentAddress", "Another street 2");
     }
 }
