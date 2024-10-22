@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.ResultsTableComponent;
 
 import java.io.File;
 
@@ -30,6 +31,7 @@ public class RegistrationPage {
             closeBtn = $("#closeLargeModal");
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     public RegistrationPage openPage(String value) {
         open(value);
@@ -135,8 +137,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
+        resultsTableComponent.checkResult(key, value);
 
         return this;
     }
