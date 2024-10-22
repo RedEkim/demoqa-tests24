@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.w3c.dom.Text;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
@@ -45,6 +46,13 @@ public class TextBoxPage {
 
     public TextBoxPage sbmBtnClick() {
         sbmBtn.click();
+
+        return this;
+    }
+
+    public TextBoxPage checkOutput(String key, String value) {
+        $("#output").$(byText(key)).parent()
+                .shouldHave(text(value));
 
         return this;
     }

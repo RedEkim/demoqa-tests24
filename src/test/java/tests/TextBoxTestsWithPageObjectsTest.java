@@ -16,22 +16,16 @@ public class TextBoxTestsWithPageObjectsTest extends TestBase {
     @Test
     void successfulFillFormTest() {
 
-        //open("/text-box");
-        //$("#userName").setValue("Mike");
         textBoxPage.openTextPoxPage()
                     .setUserName("Mike Mikov")
                     .setEmailInput("mike@mail.com")
                     .setCurrentAddressArea("Some street 1")
                     .setPermanentAddressArea("Another street 2")
                     .sbmBtnClick();
-        //$("#userEmail").setValue("mike@mail.com");
-        //$("#currentAddress").setValue("Some street 1");
-//        $("#permanentAddress").setValue("Another street 2");
-//        $("#submit").click();
 
-        $("#output #name").shouldHave(text("Mike"));
-        $("#output #email").shouldHave(text("mike@mail.com"));
-        $("#output #currentAddress").shouldHave(text("Some street 1"));
-        $("#output #permanentAddress").shouldHave(text("Another street 2"));
+        textBoxPage.checkOutput("Name:", "Mike Mikov")
+                .checkOutput("Email:", "mike@mail.com")
+                .checkOutput("Current Address :", "Some street 1")
+                .checkOutput("Permananet Address :", "Another street 2");
     }
 }
