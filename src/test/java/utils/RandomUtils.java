@@ -44,7 +44,7 @@ public class RandomUtils {
 
     public static String getRandomPhoneRu() {
         return String.format("%s%s%s%s%s", 7, getRandomInt(900, 999),
-                getRandomInt(111, 999), getRandomInt(11, 99), getRandomInt(11, 99));
+                getRandomInt(111, 999), getRandomInt(11, 99), getRandomInt(1, 9));
     }
 
     public static String getRandomGender() {

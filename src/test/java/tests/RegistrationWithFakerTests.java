@@ -4,21 +4,23 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-import utils.RandomUtils;
 
 import java.util.Locale;
+
+import static utils.RandomUtils.getRandomGender;
+import static utils.RandomUtils.getRandomPhoneRu;
 
 public class RegistrationWithFakerTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     Faker faker = new Faker(new Locale("en"));
-    RandomUtils randomUtils = new RandomUtils();
 
     String firstName = faker.name().firstName(); // Emory
     String lastName = faker.name().lastName(); // Barton
     String email = faker.internet().emailAddress();
     String streetAddress = faker.address().streetAddress(); // 60018 Sawayn Brooks Suite 449
-    String language = faker.programmingLanguage().name();
+    String gender = getRandomGender();
+    String phoneNumberRu = getRandomPhoneRu();
 
     @Test
     @DisplayName("Успешная регистрация с заполнением всех полей")
@@ -27,11 +29,11 @@ public class RegistrationWithFakerTests extends TestBase {
                         .setFirstName(firstName)
                         .setLastName(lastName)
                         .setEmail(email)
-                        .setGender(randomUtils.getRandomGender())
-                        .setUserNumber(randomUtils.getRandomPhoneRu())
-                        .setDateOfBirth("17", "October", "2024")
+                        .setGender(gender)
+                        .setUserNumber(phoneNumberRu)
+                        .setDateOfBirth("24", "October", "2024")
                         .setSubject("Math")
-                        .setSubject(language)
+                        .setSubject("English")
                         .setHobbie("Sports")
                         .setHobbie("Reading")
                         .setHobbie("Music")
@@ -44,14 +46,14 @@ public class RegistrationWithFakerTests extends TestBase {
         registrationPage.getModalDialogAppear()
                         .checkModalTitle("Thanks for submitting the form")
                         .checkResult("Student Name", firstName + " " + lastName)
-                        .checkResult("Student Email", "mikemikov@testmail.ru")
-                        .checkResult("Gender", "Male")
-                        .checkResult("Mobile", "7999546342")
-                        .checkResult("Date of Birth", "17 October,2024")
+                        .checkResult("Student Email", email)
+                        .checkResult("Gender", gender)
+                        .checkResult("Mobile", phoneNumberRu)
+                        .checkResult("Date of Birth", "24 October,2024")
                         .checkResult("Subjects", "Maths, English")
                         .checkResult("Hobbies", "Sports, Reading, Music")
                         .checkResult("Picture", "pngwing.png")
-                        .checkResult("Address", "Some address 1")
+                        .checkResult("Address", streetAddress)
                         .checkResult("State and City", "NCR Delhi")
                         .setCloseBtn();
     }
@@ -67,17 +69,17 @@ public class RegistrationWithFakerTests extends TestBase {
     @DisplayName("Успешная регистрация с заполнением основных полей")
     void minDataRegistrationTest() {
         registrationPage.openPage("/automation-practice-form")
-                        .setFirstName("Mike")
-                        .setLastName("Mikov")
-                        .setGender("Male")
-                        .setUserNumber("79995463423")
+                        .setFirstName(firstName)
+                        .setLastName(lastName)
+                        .setGender(gender)
+                        .setUserNumber(phoneNumberRu)
                         .setSubmit();
 
         registrationPage.getModalDialogAppear()
                 .checkModalTitle("Thanks for submitting the form")
-                .checkResult("Student Name", "Mike Mikov")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "7999546342")
+                .checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", phoneNumberRu)
                 .setCloseBtn();
     }
 }
